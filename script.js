@@ -17,8 +17,10 @@ function showMessage(text, isError = false) {
 // 生物データを取得して表示(view.htmlでの処理)
 async function loadAnimals() {
     const { data, error } = await supabaseClient//await=この処理が終わるまで待って！
-        .from("animal")//どのデータベースから？→animal
-        .select("*");//どれを選ぶの？→*(全部)
+        .from("shota")//どのデータベースから？→animal
+        .delete()
+        .eq("id",1)
+        .select();//どれを選ぶの？→*(全部)
 
     if (error) {//エラーが出たら？
         console.error(error);
