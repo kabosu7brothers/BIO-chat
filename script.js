@@ -1,5 +1,5 @@
-const SUPABASE_URL = "https://sdorkxwgzdynyjnkmpzi.supabase.co";//SupabaseのURL
-const SUPABASE_KEY = "sb_publishable_Mttjc-U-xVtUP9hYBblLdA_jQpHrUUN";//supabaseの公開鍵
+const SUPABASE_URL = "https://dlmaujcsjgapzszwxwhf.supabase.co/rest/v1/shota";//SupabaseのURL
+const SUPABASE_KEY = "sb_publishable_yW4Z8TyHfKHhQjV0g7SlnA_QAvBwkdP";//supabaseの公開鍵
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
