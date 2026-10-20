@@ -2,8 +2,8 @@
 import { createClient } from 'https://jsdelivr.net'
 
 // ⚡️ あなたのSupabaseプロジェクトの設定（後述の手順でURLとキーを取得します）
-const SUPABASE_URL = 'https://supabase.co'
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5...'
+const https://sdorkxwgzdynyjnkmpzi.supabase.co/rest/v1/ = 'https://supabase.co'
+const sb_publishable_Mttjc-U-xVtUP9hYBblLdA_jQpHrUUN = 'eyJhbGciOiJIUzI1NiIsInR5...'
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
