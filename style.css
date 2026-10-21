@@ -1,73 +1,78 @@
+  /* 全体レイアウト */
 body {
-  font-family: sans-serif;
-  background-color: #f0f2f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f4f6f8;
   margin: 0;
+  padding: 20px;
 }
 
-#chat-container {
-  width: 800px;
-  height: 600px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-}
-
-#chat-header {
-  background: #0084ff;
-  color: #fff;
-  padding: 12px;
+/* タイトル */
+h1 {
   text-align: center;
-  font-weight: bold;
+  color: #333;
 }
 
-#chat-messages {
-  flex: 1;
-  padding: 15px;
+/* メッセージ表示エリア */
+#messages {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  height: 300px;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.message {
-  max-width: 70%;
-  padding: 8px 12px;
-  border-radius: 15px;
+/* メッセージ1件の見た目 */
+#messages p {
+  background-color: #e9f5ff;
+  padding: 8px;
+  border-radius: 6px;
+  margin: 5px 0;
   font-size: 14px;
 }
 
-.user {
-  align-self: flex-end;
-  background: #0084ff;
-  color: #fff;
-}
-
-.bot {
-  align-self: flex-start;
-  background: #e4e6eb;
-  color: #000;
-}
-
-#chat-input-area {
+/* 入力エリア */
+#inputArea {
   display: flex;
-  border-top: 1px solid #ddd;
+  gap: 8px;
+  margin-top: 12px;
 }
 
-#user-input {
+/* 入力フォーム */
+#username, #message {
   flex: 1;
-  border: none;
-  padding: 12px;
-  outline: none;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
 }
 
-#send-button {
+/* 送信ボタン */
+#sendBtn {
+  padding: 8px 16px;
+  background-color: #0077ff;
+  color: white;
   border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+#sendBtn:hover {
+  background-color: #005fcc;
+}
+
+/* スクロールバーの見た目 */
+#messages::-webkit-scrollbar {
+  width: 8px;
+}
+#messages::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 4px;
+}
+
   background: #0084ff;
   color: #fff;
   padding: 0 20px;
