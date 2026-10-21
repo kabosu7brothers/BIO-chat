@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>名前入力</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>チャットへようこそ</h1>
+  <div id="username-area">
+    <input id="username-input" type="text" placeholder="ユーザー名を入力">
+    <button id="start-chat">チャット開始</button>
+  </div>
+
+  <script>
+    document.getElementById('start-chat').addEventListener('click', () => {
+      const username = document.getElementById('username-input').value.trim();
+      if (!username) {
+        alert("ユーザー名を入力してください");
+        return;
+      }
+      // localStorageに保存
+      localStorage.setItem('chatUsername', username);
+      // チャットページへ移動
+      window.location.href = 'chat.html';
+    });
+  </script>
+</body>
+</html>
