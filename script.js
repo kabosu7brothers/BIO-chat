@@ -1,8 +1,8 @@
 // 📦 Supabaseのライブラリを読み込み
-import { createClient } from 'https://jsdelivr.net'
+import { createClient } from 'https://jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
 // ⚡️ あなたのSupabaseプロジェクトの設定（後述の手順でURLとキーを取得します）
-const SUPABASE_URL = 'https://sdorkxwgzdynyjnkmpzi.supabase.co/rest/v1/'
+const SUPABASE_URL = 'https://sdorkxwgzdynyjnkmpzi.supabase.co'
 const SUPABASE_ANON_KEY = 'sb_publishable_Mttjc-U-xVtUP9hYBblLdA_jQpHrUUN'
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
