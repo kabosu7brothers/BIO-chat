@@ -9,11 +9,23 @@ const messagesContainer = document.getElementById('chat-messages');
 const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 
+// 前ページで保存したユーザー名を取得
+const username = localStorage.getItem('chatUsername') || 'Unknown';
+
+// ユーザー名 → CSSクラス対応表
+const userColors = {
+  'Alice': 'user1',
+  'Bob': 'user2',
+  'Charlie': 'user3',
+  'David': 'user4'
+};
+
 // メッセージ表示
 function addMessage(text, sender) {
   const msgElement = document.createElement('div');
-  msgElement.classList.add('message', sender);
-  msgElement.textContent = text;
+  const colorClass = userColors[sender] || 'user4';
+  msgElement.classList.add('message', colorClass);
+  msgElement.textContent = `[${sender}] ${text}`;
   messagesContainer.appendChild(msgElement);
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
@@ -25,7 +37,7 @@ async function handleSend() {
 
   const { error } = await supabase
     .from('messages')
-    .insert([{ text: text, sender: 'user' }]);
+    .insert([{ text: text, sender: username }]);
 
   if (error) {
     console.error('送信エラー:', error);
@@ -68,4 +80,3 @@ userInput.addEventListener('keypress', (e) => {
 
 // 初期ロード
 fetchMessages();
-
