@@ -1,17 +1,15 @@
-// 📦 Supabaseのライブラリを読み込み
-import { createClient } from 'https://jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-// ⚡️ あなたのSupabaseプロジェクトの設定（後述の手順でURLとキーを取得します）
-const SUPABASE_URL = 'https://sdorkxwgzdynyjnkmpzi.supabase.co'
-const SUPABASE_ANON_KEY = 'sb_publishable_Mttjc-U-xVtUP9hYBblLdA_jQpHrUUN'
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+// Supabase設定
+const SUPABASE_URL = 'https://sdorkxwgzdynyjnkmpzi.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Mttjc-U-xVtUP9hYBblLdA_jQpHrUUN';
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const messagesContainer = document.getElementById('chat-messages');
 const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 
-// 画面にメッセージを追加する関数（元のコードのまま）
+// メッセージ表示
 function addMessage(text, sender) {
   const msgElement = document.createElement('div');
   msgElement.classList.add('message', sender);
@@ -20,15 +18,14 @@ function addMessage(text, sender) {
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// ⭕️ 1. メッセージをデータベースに保存する（送信処理）
+// 送信処理
 async function handleSend() {
   const text = userInput.value.trim();
   if (!text) return;
 
-  // Supabaseの「messages」テーブルにデータを挿入
   const { error } = await supabase
     .from('messages')
-    .insert([{ text: text, sender: 'user' }]) // 自分を'user'として送信
+    .insert([{ text: text, sender: 'user' }]);
 
   if (error) {
     console.error('送信エラー:', error);
@@ -37,39 +34,38 @@ async function handleSend() {
   }
 }
 
-// ⭕️ 2. 過去のチャット履歴を取得して表示する
+// 過去メッセージ取得
 async function fetchMessages() {
   const { data, error } = await supabase
     .from('messages')
     .select('*')
-    .order('created_at', { ascending: true })
+    .order('created_at', { ascending: true });
 
   if (error) {
     console.error('履歴取得エラー:', error);
     return;
   }
 
-  messagesContainer.innerHTML = ''; // 画面を一度クリア
-  data.forEach(msg => {
-    addMessage(msg.text, msg.sender);
-  });
+  messagesContainer.innerHTML = '';
+  data.forEach(msg => addMessage(msg.text, msg.sender));
 }
 
-// ⭕️ 3. 新しいメッセージをリアルタイムで受信して画面に反映する
+// リアルタイム購読
 supabase
   .channel('room-1')
-  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
-    // 誰かが新しいメッセージをデータベースに入れたら、一瞬で画面に追加
+  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, payload => {
     addMessage(payload.new.text, payload.new.sender);
   })
-  .subscribe()
+  .subscribe();
 
-// ボタンやキーのイベント登録
+// イベント登録
 sendButton.addEventListener('click', handleSend);
 userInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') handleSend();
+  if (e.key === 'Enter') {
+    handleSend();
+  }
 });
 
-// 最初に対象のページを開いたときに履歴を読み込む
+// 初期ロード
 fetchMessages();
 
